@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { createPortal } from 'react-dom';
 import { Overlay, ModalBox } from './Modal.styled';
+
+const modalRoot = document.querySelector('#modal-root');
 
 function Modal({ onClose, children }) {
   useEffect(() => {
@@ -23,10 +26,11 @@ function Modal({ onClose, children }) {
     }
   };
 
-  return (
+  return createPortal(
     <Overlay onClick={handleOverlayClick}>
       <ModalBox>{children}</ModalBox>
-    </Overlay>
+    </Overlay>,
+    modalRoot,
   );
 }
 
